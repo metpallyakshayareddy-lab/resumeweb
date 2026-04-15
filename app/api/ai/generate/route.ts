@@ -8,6 +8,7 @@ Do NOT include markdown like \`\`\`json. Output raw JSON.`;
 
 export async function POST(req: NextRequest) {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const userId = getUserId(req as any);
     if (!checkRateLimit(userId)) {
       return NextResponse.json({ error: 'Rate limit exceeded. Please try again later.' }, { status: 429 });
@@ -38,7 +39,7 @@ export async function POST(req: NextRequest) {
         
         const parsed = JSON.parse(generatedOut);
         return NextResponse.json({ result: parsed });
-      } catch(e) {
+      } catch {
           // If parse fails, attempt to split by newline fallback
           const lines = generatedOut.split('\n').filter((l: string) => l.trim().length > 0).map((l: string) => l.replace(/^[-\*•\d\.]+\s*/, ''));
           return NextResponse.json({ result: lines });
@@ -46,9 +47,10 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ result: generatedOut });
-  } catch (err: any) {
-    console.error('[AI Generate] Error:', err.message);
-    const status = err.message.includes('missing') ? 503 : 500;
-    return NextResponse.json({ error: err.message }, { status });
+  } catch (err) {
+    const errorMsg = err instanceof Error ? err.message : String(err);
+    console.error('[AI Generate] Error:', errorMsg);
+    const status = errorMsg.includes('missing') ? 503 : 500;
+    return NextResponse.json({ error: errorMsg }, { status });
   }
 }

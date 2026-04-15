@@ -10,6 +10,7 @@ Return ONLY the rewritten and optimized content without any surrounding explanat
 
 export async function POST(req: NextRequest) {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const userId = getUserId(req as any);
     if (!checkRateLimit(userId)) {
       return NextResponse.json({ error: 'Rate limit exceeded. Please try again later.' }, { status: 429 });
@@ -27,9 +28,10 @@ export async function POST(req: NextRequest) {
     optimized = optimized.trim();
 
     return NextResponse.json({ optimized });
-  } catch (err: any) {
-    console.error('[AI Optimize] Error:', err.message);
-    const status = err.message.includes('missing') ? 503 : 500;
-    return NextResponse.json({ error: err.message }, { status });
+  } catch (err) {
+    const errorMsg = err instanceof Error ? err.message : String(err);
+    console.error('[AI Optimize] Error:', errorMsg);
+    const status = errorMsg.includes('missing') ? 503 : 500;
+    return NextResponse.json({ error: errorMsg }, { status });
   }
 }
