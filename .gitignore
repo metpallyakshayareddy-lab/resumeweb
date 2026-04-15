@@ -34,3 +34,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/lib/generated/prisma
+
+# additional ignores
+.env
+dev.db
+*.txt
+gemini_models.json
+gemini_out.json
