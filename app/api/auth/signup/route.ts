@@ -45,7 +45,8 @@ export async function POST(req: Request) {
     
     return response;
   } catch (error) {
-    return NextResponse.json({ error: 'Internal server error processing signup' }, { status: 500 });
+    const msg = error instanceof Error ? error.message : 'Internal server error processing signup';
+    return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
 

@@ -37,6 +37,7 @@ export async function POST(req: Request) {
     return response;
   } catch (error) {
     console.error('Login Error:', error);
-    return NextResponse.json({ error: 'Internal connection error logging in' }, { status: 500 });
+    const msg = error instanceof Error ? error.message : 'Internal connection error logging in';
+    return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
