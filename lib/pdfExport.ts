@@ -1,5 +1,5 @@
 // Copyright (c) 2026 Resume Forge
-// Live App: <YOUR_DEPLOYMENT_URL>
+// Live App: https://resumewebin-p7wo9bht7-metpallyakshayareddy-1914s-projects.vercel.app/
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 

@@ -1,5 +1,5 @@
 // Copyright (c) 2026 Resume Forge
-// Live App: <YOUR_DEPLOYMENT_URL>
+// Live App: https://resumewebin-p7wo9bht7-metpallyakshayareddy-1914s-projects.vercel.app/
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import {
