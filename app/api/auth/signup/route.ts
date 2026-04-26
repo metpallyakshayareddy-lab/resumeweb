@@ -44,9 +44,9 @@ export async function POST(req: Request) {
     });
     
     return response;
-  } catch (error) {
-    const msg = error instanceof Error ? error.message : 'Internal server error processing signup';
+  } catch (error: any) {
+    console.error('Signup Error:', error);
+    const msg = error?.message || String(error) || 'FATAL SIGNUP ERROR';
     return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
-

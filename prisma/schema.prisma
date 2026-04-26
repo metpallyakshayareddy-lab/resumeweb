@@ -31,17 +31,17 @@ model Resume {
 }
 
 model Section {
-  id        String   @id @default(uuid())
-  resumeId  String
-  resume    Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
-  type      String
-  content   String    @default("{}")
+  id       String @id @default(uuid())
+  resumeId String
+  resume   Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  type     String
+  content  String @default("{}")
 }
 
 model Template {
-  id        String   @id @default(uuid())
-  name      String
-  layout    String    @default("{}")
+  id     String @id @default(uuid())
+  name   String
+  layout String @default("{}")
 }
 
 model Version {
