@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { callGemini, checkRateLimit, getUserId } from '@/lib/gemini';
 
@@ -136,3 +137,4 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: message }, { status });
   }
 }
+
